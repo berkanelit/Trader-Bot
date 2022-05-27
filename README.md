@@ -1,3 +1,1 @@
-# Trader-Bot
-# Trader-Bot
-# Trader-Bot
+Yeni Nesil Alım Satım botu
