@@ -65,7 +65,7 @@ def get_BOLL(prices, time_values=None, ma_type=21, stDev=2, map_time=False):
 
 
 ## This function is used to calculate and return the RSI indicator.
-def get_RSI(prices, time_values=None, rsiType=14, map_time=False):
+def get_RSI(prices, time_values=None, rsiType=14, map_time=True):
     """ 
     This function uses 2 parameters to calculate the RSI-
     

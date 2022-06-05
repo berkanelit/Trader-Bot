@@ -18,7 +18,7 @@ window.Apex = {
 var base_candle_chart_configuration = {
     series: [],
     chart: {
-        height: 800,
+        height: 500,
         id: 'main_Chart',
         type: 'line'
     },
