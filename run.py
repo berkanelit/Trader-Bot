@@ -16,7 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger()
 
 SETTINGS_FILE_NAME = 'settings.conf'
-DEFAULT_SETTINGS_DATA = '''# Tüccar için kullanılan Genel ve Özel anahtar paisleri.
+DEFAULT_SETTINGS_DATA = '''# Public and Private key pais used for the for the trader
 PUBLIC_KEY=
 PRIVATE_KEY=
 
@@ -37,7 +37,7 @@ TRADER_INTERVAL=15m
 # İşlem yapılacak piyasalar (şu anda sadece BTC piyasaları), çoklu piyasa işlemleri için piyasaları bir ile ayırır.
 TRADING_MARKETS=BTC-ETH,BTC-LTC
 
-# Web uygulaması için yapılandırma (boş bırakılırsa varsayılan IP=127.0.0.1, Bağlantı Noktası=500)
+# Web uygulaması için yapılandırma (boş bırakılırsa varsayılan IP=127.0.0.1, Bağlantı Noktası=5000)
 HOST_IP=
 HOST_PORT=
 
