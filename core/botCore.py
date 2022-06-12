@@ -19,22 +19,22 @@ from . import trader
 
 MULTI_DEPTH_INDICATORS = ['ema', 'sma', 'rma', 'order']
 
-# Initilize globals.
+# Globalleri başlat.
 
-## Setup flask app/socket
+## Şişe uygulamasını/soketini kurun
 APP         = Flask(__name__)
 SOCKET_IO   = SocketIO(APP)
 
-## Initilize base core object.
+## Temel çekirdek nesnesini başlat.
 core_object = None
 
 started_updater = False
 
-## Initilize IP/port pair globals.
+## IP/port çifti globallerini başlat.
 host_ip     = ''
 host_port   = ''
 
-## Set traders cache file name.
+## Tüccarların önbellek dosya adını ayarlayın.
 CAHCE_FILES = 'traders.json'
 
 
@@ -44,7 +44,7 @@ def override_url_for():
 
 
 def dated_url_for(endpoint, **values):
-    # Override to prevent cached assets being used.
+    # Önbelleğe alınmış varlıkların kullanılmasını önlemek için geçersiz kıl.
     if endpoint == 'static':
         filename = values.get('filename', None)
         if filename:
@@ -57,16 +57,16 @@ def dated_url_for(endpoint, **values):
 
 @APP.route('/', methods=['GET'])
 def control_panel():
-    # Base control panel configuration.
+    # Temel kontrol paneli yapılandırması.
     global started_updater 
 
-    ## Web updater used for live updating.
+    ## Canlı güncelleme için kullanılan web güncelleyici.
     if not(started_updater):
         started_updater = True
         web_updater_thread = threading.Thread(target=web_updater)
         web_updater_thread.start()
 
-    ## Set socket ip/port.
+    ## Soket ip/portunu ayarla.
     start_up_data = {
         'host':{'IP': host_ip, 'Port': host_port},
         'market_symbols': core_object.trading_markets
@@ -77,25 +77,25 @@ def control_panel():
 
 @APP.route('/rest-api/v1/trader_update', methods=['POST'])
 def update_trader():
-    # Base API for managing trader interaction.
+    # Tüccar etkileşimini yönetmek için temel API.
     data = request.get_json()
 
-    ## Check if specified bot exists.
+    ## Belirtilen bot olup olmadığını kontrol edin.
     current_trader = api_error_check(data)
 
     if current_trader == None:
-        ## No trader therefore return false.
+        ## Hiçbir tüccar bu nedenle false döndürür.
         return(json.dumps({'call':False, 'message':'INVALID_TRADER'}))
     elif data['action'] == 'start':
-        ## Updating trader status to running.
+        ## Tüccar durumu çalışıyor olarak güncelleniyor.
         if current_trader.state_data['runtime_state'] == 'FORCE_PAUSE':
             current_trader.state_data['runtime_state'] = 'RUN'
     elif data['action'] == 'pause':
-        ## Updating trader status to paused.
+        ## Tüccar durumu duraklatıldı olarak güncelleniyor.
         if current_trader.state_data['runtime_state'] == 'RUN':
             current_trader.state_data['runtime_state'] = 'FORCE_PAUSE'
     else:
-        ## If action was not found return false
+        ## İşlem bulunamadıysa false döndür
         return(json.dumps({'call':False, 'message':'INVALID_ACTION'}))
 
     return(json.dumps({'call':True}))
@@ -103,16 +103,16 @@ def update_trader():
 
 @APP.route('/rest-api/v1/get_trader_charting', methods=['GET'])
 def get_trader_charting():
-    # Endpoint to pass trader indicator data.
+    # Tüccar gösterge verilerini geçmek için uç nokta.
     market = request.args.get('market')
     limit = int(request.args.get('limit'))
     data = {'market':market}
 
-    ## Check if specified bot exists.
+    ## Belirtilen bot olup olmadığını kontrol edin.
     current_trader = api_error_check(data)
 
     if current_trader == None:
-        ## No trader therefore return false.
+        ## Hiçbir tüccar bu nedenle false döndürür.
         return(json.dumps({'call':False, 'message':'INVALID_TRADER'}))
 
     candle_data = core_object.get_trader_candles(current_trader.print_pair)[:limit]
@@ -124,16 +124,16 @@ def get_trader_charting():
 
 @APP.route('/rest-api/v1/get_trader_indicators', methods=['GET'])
 def get_trader_indicators():
-    # Endpoint to pass trader indicator data.
+    # Tüccar gösterge verilerini geçmek için uç nokta.
     market = request.args.get('market')
     limit = int(request.args.get('limit'))
     data = {'market':market}
 
-    ## Check if specified bot exists.
+    ## Belirtilen bot olup olmadığını kontrol edin.
     current_trader = api_error_check(data)
 
     if current_trader == None:
-        ## No trader therefore return false.
+        ## Hiçbir tüccar bu nedenle false döndürür.
         return(json.dumps({'call':False, 'message':'INVALID_TRADER'}))
 
     indicator_data = core_object.get_trader_indicators(current_trader.print_pair)
@@ -143,16 +143,16 @@ def get_trader_indicators():
 
 @APP.route('/rest-api/v1/get_trader_candles', methods=['GET'])
 def get_trader_candles():
-    # Endpoint to pass trader candles.
+    # Tüccar mumlarını geçmek için uç nokta.
     market = request.args.get('market')
     limit = int(request.args.get('limit'))
     data = {'market':market}
 
-    ## Check if specified bot exists.
+    ## Belirtilen bot olup olmadığını kontrol edin.
     current_trader = api_error_check(data)
 
     if current_trader == None:
-        ## No trader therefore return false.
+        ## Hiçbir tüccar bu nedenle false döndürür.
         return(json.dumps({'call':False, 'message':'INVALID_TRADER'}))
 
     candle_data = core_object.get_trader_candles(current_trader.print_pair)[:limit]
@@ -162,7 +162,7 @@ def get_trader_candles():
 
 @APP.route('/rest-api/v1/test', methods=['GET'])
 def test_rest_call():
-    # API endpoint test
+    # API uç nokta testi
     return(json.dumps({'call':True, 'message':'HELLO WORLD!'}))
 
 
@@ -181,7 +181,7 @@ def shorten_indicators(indicators, end_time):
 
 
 def api_error_check(data):
-    ## Check if specified bot exists.
+    ## Belirtilen bot olup olmadığını kontrol edin.
     current_trader = None
     for trader in core_object.trader_objects:
         if trader.print_pair == data['market']:
@@ -191,17 +191,17 @@ def api_error_check(data):
 
 
 def web_updater():
-    # Web updater use to update live via socket.
+    # Web güncelleyici, soket üzerinden canlı güncelleme yapmak için kullanılır.
     lastHash = None
 
     while True:
         if core_object.coreState == 'RUN':
-            ## Get trader data and hash it to find out if there have been any changes.
+            ## Tüccar verilerini alın ve herhangi bir değişiklik olup olmadığını öğrenmek için hashleyin.
             traderData = core_object.get_trader_data()
             currHash = hashlib.md5(str(traderData).encode())
 
             if lastHash != currHash:
-                ## Update any new changes via socket.
+                ## Soket aracılığıyla tüm yeni değişiklikleri güncelleyin.
                 lastHash = currHash
                 total_bulk_data = []
                 for trader in traderData:
@@ -223,14 +223,14 @@ def web_updater():
 class BotCore():
 
     def __init__(self, settings, logs_dir, cache_dir):
-        # Initilization for the bot core managment object.
+        # Bot çekirdek yönetim nesnesi için başlatma.
         logging.info('[BotCore] Initilizing the BotCore object.')
 
-        ## Setup binance REST and socket API.
+        ## Binance REST ve soket API'sini ayarlayın.
         self.rest_api           = api_master_rest_caller.Binance_REST(settings['public_key'], settings['private_key'])
         self.socket_api         = api_master_socket_caller.Binance_SOCK()
 
-        ## Setup the logs/cache dir locations.
+        ## Günlükleri/önbellek dizini konumlarını ayarlayın.
         self.logs_dir           = logs_dir
         self.cache_dir          = cache_dir
 
@@ -239,38 +239,38 @@ class BotCore():
         self.market_type        = settings['market_type']
         self.update_bnb_balance = settings['update_bnb_balance']
 
-        ## Setup max candle/depth setting.
+        ## Maksimum mum/derinlik ayarını yapın.
         self.max_candles        = settings['max_candles']
         self.max_depth          = settings['max_depth']
 
-        ## Get base quote pair (This prevents multiple different pairs from conflicting.)
+        ## Temel teklif çiftini al (Bu, birden çok farklı çiftin çakışmasını önler.)
         pair_one = settings['trading_markets'][0]
 
         self.quote_asset        = pair_one[:pair_one.index('-')]
         self.base_currency      = settings['trading_currency']
         self.candle_Interval    = settings['trader_interval']
 
-        ## Initilize base trader settings.
+        ## Temel tüccar ayarlarını başlat.
         self.trader_objects     = []
         self.trading_markets    = settings['trading_markets']
 
-        ## Initilize core state
+        ## Çekirdek durumu başlat
         self.coreState          = 'READY'
 
 
     def start(self):
-        # Start the core object.
+        # Çekirdek nesneyi başlatın.
         logging.info('[BotCore] Starting the BotCore object.')
         self.coreState = 'SETUP'
 
-        ## check markets
+        ## pazarları kontrol edin
         found_markets = []
         not_supported = []
 
         for market in self.rest_api.get_exchangeInfo()['symbols']:
             fmtMarket = '{0}-{1}'.format(market['quoteAsset'], market['baseAsset'])
 
-            # If the current market is not in the trading markets list then skip.
+            # Mevcut piyasa işlem piyasaları listesinde yoksa atlayın.
             if not fmtMarket in self.trading_markets:
                 continue
 
@@ -280,36 +280,36 @@ class BotCore():
                 not_supported.append(fmtMarket)
                 continue
 
-            # This is used to setup min quantity.
+            # Minimum miktarı ayarlamak için kullanılır.
             if float(market['filters'][2]['minQty']) < 1.0:
                 minQuantBase = (Decimal(market['filters'][2]['minQty'])).as_tuple()
                 lS = abs(int(len(minQuantBase.digits)+minQuantBase.exponent))+1
             else: lS = 0
 
-            # This is used to set up the price precision for the market.
+            # Bu, piyasa için fiyat hassasiyetini ayarlamak için kullanılır.
             tickSizeBase = (Decimal(market['filters'][0]['tickSize'])).as_tuple()
             tS = abs(int(len(tickSizeBase.digits)+tickSizeBase.exponent))+1
 
-            # This is used to get the markets minimal notation.
+            # Bu, piyasaların minimum gösterimini elde etmek için kullanılır.
             mN = float(market['filters'][3]['minNotional'])
 
-            # Put all rules into a json object to pass to the trader.
+            # Tüm kuralları tüccara iletmek için bir json nesnesine koyun.
             market_rules = {'LOT_SIZE':lS, 'TICK_SIZE':tS, 'MINIMUM_NOTATION':mN}
 
-            # Initilize trader objecta dn also set-up its inital required data.
+            # Trader objecta dn'yi başlatın, ayrıca ilk gerekli verilerini ayarlayın.
             traderObject = trader.BaseTrader(market['quoteAsset'], market['baseAsset'], self.rest_api, socket_api=self.socket_api)
             traderObject.setup_initial_values(self.market_type, self.run_type, market_rules)
             self.trader_objects.append(traderObject)
 
         
-        ## Show markets that dont exist on the binance exchange.
+        ## Binance borsasında mevcut olmayan pazarları gösterin.
         if len(self.trading_markets) != len(found_markets):
             no_market_text = ''
             for market in [market for market in self.trading_markets if market not in found_markets]:
                 no_market_text+=str(market)+', '
             logging.warning('Following pairs dont exist: {}'.format(no_market_text[:-2]))
 
-        ## Show markets that dont support the market type.
+        ## Pazar türünü desteklemeyen pazarları göster.
         if len(not_supported) > 0:
             not_support_text = ''
             for market in not_supported:
@@ -334,7 +334,7 @@ class BotCore():
 
         self.socket_api.start()
 
-        # Load the wallets.
+        # Cüzdanları yükleyin.
         if self.run_type == 'REAL':
             user_info = self.rest_api.get_account(self.market_type)
             if self.market_type == 'SPOT':
@@ -352,18 +352,18 @@ class BotCore():
         else:
             current_tokens = {self.quote_asset:[float(self.base_currency), 0.0]}
 
-        # Load cached data
+        # Önbelleğe alınmış verileri yükle
         cached_traders_data = None
         if os.path.exists(self.cache_dir+CAHCE_FILES):
             with open(self.cache_dir+CAHCE_FILES, 'r') as f:
                 cached_traders_data = json.load(f)['data']
 
-        ## Setup the trader objects and start them.
+        ## Tüccar nesnelerini kurun ve başlatın.
         logging.info('[BotCore] Starting the trader objects.')
         for trader_ in self.trader_objects:
             currSymbol = "{0}{1}".format(trader_.base_asset, trader_.quote_asset)
 
-            # Update trader with cached data (to resume trades/keep records of trades.)
+            # Tüccarı önbelleğe alınmış verilerle güncelleyin (işlemleri sürdürmek/işlemlerin kayıtlarını tutmak için.)
             if cached_traders_data != '' and cached_traders_data:
                 for cached_trader in cached_traders_data:
                     m_split = cached_trader['market'].split('-')
@@ -418,7 +418,7 @@ class BotCore():
         while self.coreState != 'STOP':
             socket_buffer_global = self.socket_api.socketBuffer
 
-            # If outbound postion is seen then wallet has updated.
+            # Giden gönderi görülürse cüzdan güncellenmiştir.
             if 'outboundAccountPosition' in socket_buffer_global:
                 if last_wallet_update_time != socket_buffer_global['outboundAccountPosition']['E']:
                     last_wallet_update_time = socket_buffer_global['outboundAccountPosition']['E']
