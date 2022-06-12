@@ -2,7 +2,7 @@ import logging
 import numpy as np
 import technical_indicators as TI
 
-## Minimum price rounding.
+## Minimum fiyat yuvarlama.
 pRounding = 8
 
 def technical_indicators(candles):
@@ -66,10 +66,10 @@ def technical_indicators(candles):
 
 
 def other_conditions(custom_conditional_data, trade_information, previous_trades, position_type, candles, indicators, symbol):
-    # Define defaults.
+    # Varsayılanları tanımlayın.
     can_order = True
 
-    # Setup additional extra conditions for trading.
+    # Ticaret için ek ekstra koşullar ayarlayın.
     if trade_information['market_status'] == 'COMPLETE_TRADE':
         trade_information['market_status'] = 'TRADING'
 

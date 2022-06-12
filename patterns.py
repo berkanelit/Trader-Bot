@@ -1,50 +1,50 @@
 import numpy as np
 '''
-x : Price list
-y : Last comparible value.
-z : Historic comparible value.
+x : Fiyat listesi
+y : Son karşılaştırılabilir değer.
+z : Geçmiş karşılaştırılabilir değer.
 
 # find_high_high
-( x : price list, y : last high, z : historic high value )
-Return highest value seen vs both recent and historically or None.
+( x : fiyat listesi, y : son yüksek değer, z : tarihi yüksek değer )
+Hem yakın zamana hem de geçmişe göre görülen en yüksek değeri döndür veya Yok.
 
-# find_high
-( x : price list, y : last high )
-Return the highest value seen or None.
+# bul_yüksek
+( x : fiyat listesi, y : son en yüksek )
+Görülen en yüksek değeri döndür veya Yok.
 
 # find_low_high
-( x : price list, y : last high, z : historic high value )
-Return highest value seen recently but lower historically or None.
+( x : fiyat listesi, y : son yüksek değer, z : tarihi yüksek değer )
+Yakın zamanda görülen ancak geçmişte daha düşük olan en yüksek değeri döndür veya Yok.
 
 # find_low_low
-( x : price list, y : last low, z : historic low value )
-Return the lowest value seen vs both recent and historically or None.
+( x : fiyat listesi, y : son dip, z : tarihi düşük değer )
+Hem yakın zamana hem de geçmişe göre görülen en düşük değeri veya Yok'u döndürün.
 
-# find_low
-( x : price list, y : last low )
-Return the lowest value seen or None.
+# bul_düşük
+( x : fiyat listesi, y : son dip )
+Görülen en düşük değeri veya Yok'u döndürün.
 
 # find_high_low
-( x : price list, y : last low, z : historic low value )
-Return lowest value seen recently but higher historically or None.
+( x : fiyat listesi, y : son dip, z : tarihi düşük değer )
+Yakın zamanda görülen ancak geçmişte daha yüksek olan en düşük değeri döndür veya Yok.
 '''
-## High setups
+## Yüksek kurulumlar
 find_high_high  = lambda x, y, z: x.max() if z < x.max() > y else None
 find_high       = lambda x, y: x.max() if x.max() > y else None
 find_low_high   = lambda x, y, z: x.max() if z > x.max() > y else None
-## Low setup
+## Düşük kurulum
 find_low_low    = lambda x, y, z: x.min() if z > x.min() < y else None
 find_low        = lambda x, y: x.min() if x.min() < y else None
 find_high_low   = lambda x, y, z: x.min() if z < x.min() < y else None
 
 """
-Trading patterns.
+Ticaret kalıpları.
 
 """
 class pattern_W:
     def __init__(self):
         self.required_points = 4
-        self.result_points = 1 # Only required for testing to view outcome.
+        self.result_points = 1 # Yalnızca sonucu görüntülemek için test için gereklidir.
         self.segment_span = 4
         self.price_point = 0
 
