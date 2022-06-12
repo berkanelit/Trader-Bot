@@ -10,7 +10,7 @@
 }
 
 body{
-   	background-color: #f3f5f9;
+   	background-color: #000000;
 	display: flex;
   	position: relative;
 }
@@ -18,10 +18,10 @@ body{
 .sidebar{
   width: 200px;
   height: 100%;
-  background: #4b4276;
+  background: #ffffff;
   padding: 30px 0px;
   position: fixed;
-  color: #bdb8d7;
+  color: #34257b;
 }
 
 .sidebar ul li{
@@ -34,7 +34,7 @@ body{
 }
 
 .sidebar ul li:hover{
-  background-color: #594f8d;
+  background-color: #76767a;
 }
     
 .sidebar ul li:hover a{
