@@ -18,10 +18,10 @@ body{
 .sidebar{
   width: 200px;
   height: 100%;
-  background: #ffffff;
+  background: #2e2c2c;
   padding: 30px 0px;
   position: fixed;
-  color: #34257b;
+  color: #19a437;
 }
 
 .sidebar ul li{
@@ -30,7 +30,7 @@ body{
 
 .sidebar ul li a{
   display: block;
-  color: #bdb8d7;
+  color: #666666;
 }
 
 .sidebar ul li:hover{
@@ -44,7 +44,7 @@ body{
 main {
 	width: 100%;
 	margin-left: 200px;
-	background-color: #F5F5F0;
+	background-color: #20201d;
 	padding-left: 20px;
 	padding-top: 10px;
 }

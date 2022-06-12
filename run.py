@@ -33,6 +33,7 @@ UPDATE_BNB_BALANCE=True
 TRADER_INTERVAL=15m
 
 # Yatırımcının kullanacağı maksimum para birimi (BTC olarak) ayrıca bunun piyasa sayısıyla arttığına dikkat edin, yani her piyasanın ticaret döviz çifti olarak 2 çifti 0,0015 olacaktır.TRADING_CURRENCY=0.002
+TRADING_CURRENCY=0.002
 
 # İşlem yapılacak piyasalar (şu anda sadece BTC piyasaları), çoklu piyasa işlemleri için piyasaları bir ile ayırır.
 TRADING_MARKETS=BTC-ETH,BTC-LTC
