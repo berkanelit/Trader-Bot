@@ -411,7 +411,7 @@ class BaseTrader(object):
 
     def _trade_manager(self, market_type, cp, indicators, candles):
         ''' 
-        Here both the sell and buy conditions are managed by the trader.
+        Burada hem satış hem de satın alma koşulları tüccar tarafından yönetilir.
         -
         '''
 

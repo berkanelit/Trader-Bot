@@ -27,16 +27,16 @@ IS_TEST=True
 MARKET_TYPE=SPOT
 
 # Düşük olduğunda BNB bakiyesini otomatik olarak güncelleyin (ticaret ücretleri için, yalnızca gerçek ticaret için geçerlidir)
-UPDATE_BNB_BALANCE=True
+UPDATE_BNB_BALANCE=False
 
 # Tüccar için kullanılan aralık (1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d).
-TRADER_INTERVAL=15m
+TRADER_INTERVAL=4h
 
 # Yatırımcının kullanacağı maksimum para birimi (BTC olarak) ayrıca bunun piyasa sayısıyla arttığına dikkat edin, yani her piyasanın ticaret döviz çifti olarak 2 çifti 0,0015 olacaktır.TRADING_CURRENCY=0.002
-TRADING_CURRENCY=0.002
+TRADING_CURRENCY=100
 
 # İşlem yapılacak piyasalar (şu anda sadece BTC piyasaları), çoklu piyasa işlemleri için piyasaları bir ile ayırır.
-TRADING_MARKETS=BTC-ETH,BTC-LTC
+TRADING_MARKETS=USDT-BTC
 
 # Web uygulaması için yapılandırma (boş bırakılırsa varsayılan IP=127.0.0.1, Bağlantı Noktası=5000)
 HOST_IP=
