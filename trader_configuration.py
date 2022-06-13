@@ -77,7 +77,7 @@ def other_conditions(custom_conditional_data, trade_information, previous_trades
     return(custom_conditional_data, trade_information)
 
 def long_exit_conditions(custom_conditional_data, trade_information, indicators, prices, candles, symbol):
-    # Place Long exit (sell) conditions under this section.
+    # Uzun çıkış (sat) koşullarını bu bölümün altına yerleştirin.
     order_point = 0
     signal_id = 0
     macd = indicators['macd']
@@ -92,7 +92,7 @@ def long_exit_conditions(custom_conditional_data, trade_information, indicators,
     stop_loss_price = float('{0:.{1}f}'.format((trade_information['buy_price']-(trade_information['buy_price']*0.004)), pRounding))
     stop_loss_status = basic_stoploss_setup(trade_information, stop_loss_price, stop_loss_price, 'LONG')
 
-    # Base return for waiting and updating order positions.
+    # Bekleme ve sipariş pozisyonlarının güncellenmesi için taban getiri.
     if stop_loss_status:
         return(stop_loss_status)
     else:
@@ -100,7 +100,7 @@ def long_exit_conditions(custom_conditional_data, trade_information, indicators,
 
 
 def long_entry_conditions(custom_conditional_data, trade_information, indicators, prices, candles, symbol):
-    # Place Long entry (buy) conditions under this section.
+    # Uzun giriş (satın alma) koşullarını bu bölümün altına yerleştirin.
     order_point = 0
     signal_id = 0
     macd = indicators['macd']
@@ -114,7 +114,7 @@ def long_entry_conditions(custom_conditional_data, trade_information, indicators
                     'description':'LONG entry signal 1', 
                     'order_type':'MARKET'})
 
-    # Base return for waiting and updating order positions.
+    # Bekleme ve sipariş pozisyonlarının güncellenmesi için taban getiri.
     if order_point == 0:
         return({'order_type':'WAIT'})
     else:
@@ -122,7 +122,7 @@ def long_entry_conditions(custom_conditional_data, trade_information, indicators
 
 
 def short_exit_conditions(custom_conditional_data, trade_information, indicators, prices, candles, symbol):
-    ## Place Short exit (sell) conditions under this section.
+    ## Bu bölümün altına Kısa çıkış (sat) koşullarını yerleştirin.
     order_point = 0
     signal_id = 0
     macd = indicators['macd']
@@ -137,7 +137,7 @@ def short_exit_conditions(custom_conditional_data, trade_information, indicators
     stop_loss_price = float('{0:.{1}f}'.format((trade_information['buy_price']+(trade_information['buy_price']*0.004)), pRounding))
     stop_loss_status = basic_stoploss_setup(trade_information, stop_loss_price, stop_loss_price, 'SHORT')
 
-    # Base return for waiting and updating order positions.
+    # Bekleme ve sipariş pozisyonlarının güncellenmesi için taban getiri.
     if stop_loss_status:
         return(stop_loss_status)
     else:
@@ -145,7 +145,7 @@ def short_exit_conditions(custom_conditional_data, trade_information, indicators
 
 
 def short_entry_conditions(custom_conditional_data, trade_information, indicators, prices, candles, symbol):
-    ## Place Short entry (buy) conditions under this section.
+    ## Bu bölümün altına Kısa giriş (satın alma) koşullarını yerleştirin.
     order_point = 0
     signal_id = 0
     macd = indicators['macd']
@@ -159,7 +159,7 @@ def short_entry_conditions(custom_conditional_data, trade_information, indicator
                     'description':'SHORT entry signal 1', 
                     'order_type':'MARKET'})
 
-    # Base return for waiting and updating order positions.
+    # Bekleme ve sipariş pozisyonlarının güncellenmesi için taban getiri.
     if order_point == 0:
         return({'order_type':'WAIT'})
     else:
@@ -167,7 +167,7 @@ def short_entry_conditions(custom_conditional_data, trade_information, indicator
 
 
 def basic_stoploss_setup(trade_information, price, stop_price, position_type):
-    # Basic stop-loss setup.
+    # Temel stop-loss kurulumu.
     if trade_information['order_type'] == 'STOP_LOSS_LIMIT':
         return
 
