@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Trader Control Panel</title>
+        <title>Trader Kontrol Panel</title>
         <meta charst="en">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -25,7 +25,7 @@
         <div class="sidebar">
             <h2>Trader Bot</h2>
             <ul>
-                <li><a href=# onclick="hide_section(event, 'Overview');">Overview</a></li>
+                <li><a href=# onclick="hide_section(event, 'Overview');">Genel Bakış</a></li>
             {% for market_symbol in data.market_symbols %}
                 <li><a href=# onclick="hide_section(event, '{{ market_symbol }}');">{{ market_symbol }}</a></li>
             {% endfor %}
@@ -38,7 +38,6 @@
             {% endfor %}
         </main>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>
- <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
     <div id="tradingview_53cb5"></div>
     <div class="tradingview-widget-copyright">TradingView'den <a href="https://tr.tradingview.com/symbols/FRONTUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">FRONTUSDT Grafiği</span></a></div>
@@ -66,6 +65,5 @@
     );
     </script>
   </div>
-  <!-- TradingView Widget END -->
     </body>
 </html>
