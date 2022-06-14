@@ -196,7 +196,7 @@ def get_S_O(priceClose, priceHigh, priceLow, time_values=None, period=14, K=3, D
 
 
 ## This function is used to calculate and return SMA.
-def get_SMA(prices, maPeriod, time_values=None, prec=8, map_time=False, result_format='normal'):
+def get_SMA(prices, maPeriod, time_values=None, prec=8, map_time=True, result_format='normal'):
     """
     This function uses 3 parameters to calculate the Simple Moving Average-
     
